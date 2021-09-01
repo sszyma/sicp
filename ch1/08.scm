@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; Number -> Number
 ;; Computes cube root of a given number using Newton's method
 (define (cbrt x)

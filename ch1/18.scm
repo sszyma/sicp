@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; iterative repeated multiplication in a logarithmic time
 (define (* a b)
   (define (double x) (+ x x))

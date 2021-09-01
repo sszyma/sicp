@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; Expressions with their respective values in the comments
 
 10 ; => 10

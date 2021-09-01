@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; A direct, recursive implementation of the function f
 (define (f n)
   (if (< n 3)

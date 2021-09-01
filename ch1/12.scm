@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; computes the binomial coefficient for 0 <= k <= n
 (define (binomial n k)
   (cond ((= n 0) 1)

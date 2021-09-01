@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; Number Number Number -> Number
 ;; takes three numbers and sums the square of the two larger ones
 (define (sum-sqr-larger a b c)

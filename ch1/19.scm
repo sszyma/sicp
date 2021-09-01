@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; fibonacci numbers in logarithmic time
 ;; note that b_next = bp' + aq'
 ;;                  = (bp + aq)p + (bq + aq + ap)q

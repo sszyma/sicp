@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; repeated multiplication in a linear time
 ;; (define (* a b)
 ;;   (cond ((or (= a 0) (= b 0)) 0)

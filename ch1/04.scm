@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; Number Number -> Number
 ;; add to a the absolute value of b
 (define (a-plus-abs-b a b)

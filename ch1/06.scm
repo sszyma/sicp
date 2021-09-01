@@ -1,5 +1,3 @@
-#lang sicp
-
 ;; Alyssa's implementation of the 'if' special form,
 ;; the sqrt-iter procedure is rewritten using it.
 ;; The problem is that the interpreter using
