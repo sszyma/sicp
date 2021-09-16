@@ -1,0 +1,21 @@
+;; generates all ordered triples of distinct positive integers i,j,k <= n
+;; such that i+j+k = s
+(define (triples n s)
+  (define (enumerate-interval l u)
+    (if (> l u)
+	'()
+	(cons l (enumerate-interval (+ l 1) u))))
+  (filter (lambda (t)
+	    (let ((i (car t)) (j (cadr t)) (k (caddr t)))
+	      (and (= (fold-right + 0 t) s)
+		   (not (or (= i j) (= i k) (= j k))))))
+	  (let ((seq (enumerate-interval 1 n)))
+	    (fold-right append '()
+			(fold-right append '()
+				    (map (lambda (i)
+					   (map (lambda (j)
+						  (map (lambda (k) (list i j k))
+						       seq))
+						seq))
+					 seq))))))
+					    

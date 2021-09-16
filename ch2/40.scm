@@ -1,0 +1,32 @@
+(define (flatmap proc seq)
+  (fold-right append '() (map proc seq)))
+
+;; generates a sequence of pairs (i,j) where 1<=j<i<=n
+(define (unique-pairs n)
+  (define (enumerate-interval l u)
+    (if (> l u)
+	'()
+	(cons l (enumerate-interval (+ l 1) u))))
+  (flatmap (lambda (i) (map (lambda (j) (list i j))
+			    (enumerate-interval 1 (- i 1))))
+		   (enumerate-interval 1 n)))
+
+(define (prime-sum-pairs n)
+  (define (prime? n)
+    (if (= n 1) #f
+	(= (smallest-divisor n) n)))
+  (define (smallest-divisor n)
+    (define (find-divisor n test-divisor)
+      (cond ((> (square test-divisor) n) n)
+            ((divides? test-divisor n) test-divisor)
+            (else (find-divisor n (+ test-divisor 1)))))
+    (find-divisor n 2))
+  (define (divides? a b) (= (remainder b a) 0))
+  (define (square x) (* x x))
+  (map (lambda (p)
+	 (let ((i (car p))
+	       (j (cadr p)))
+	   (list i j (+ i j)))) ;; it performs the addition twice...
+       (filter (lambda (p)
+		 (prime? (+ (car p) (cadr p))))
+	       (unique-pairs n))))
