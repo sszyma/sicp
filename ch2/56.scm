@@ -28,8 +28,8 @@
 	(else (list '- m s))))
 (define (difference? exp)
   (and (list? exp) (eq? (car exp) '-)))
-(define (minuend d) (cadr m))
-(define (subtrahend d) (caddr m))
+(define (minuend d) (cadr d))
+(define (subtrahend d) (caddr d))
 
 (define (make-product m1 m2)
   (cond ((or (=number? m1 0) (=number? m2 0)) 0)
@@ -73,6 +73,10 @@
   (and (list? exp) (eq? (car exp) 'log)))
 (define (antilog log) (cadr log))
 
+(define euler (exp 1))
+
+;; It's still ugly as hell, so I no longer have the
+;; motivation to implement trig functions
 (define (deriv exp var)
   (cond ((number? exp) 0)
 	((variable? exp)
@@ -96,16 +100,16 @@
 	       (divisor (divisor exp)))
 	   (make-quotient
 	    (make-difference
-	     (make-product dividend (deriv divisor var))
-	     (make-product (deriv dividend var) divisor))
+	     (make-product (deriv dividend var) divisor)
+	     (make-product dividend (deriv divisor var)))
 	    (make-exponentiation divisor 2))))
 	((exponentiation? exp)
 	 (let ((base (base exp))
 	       (expt (exponent exp)))
 	   (let ((logbase (make-log base)))
 	     (make-product
-	      (make-exponentiation (exp 1) (make-product expt logbase))
-	      (deriv (make-product base logbase) var)))))
+	      (make-exponentiation euler (make-product expt logbase))
+	      (deriv (make-product expt logbase) var)))))
 	((log? exp)
 	 (let ((antilog (antilog exp)))
 	   (make-quotient (deriv antilog var) antilog)))
