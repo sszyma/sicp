@@ -9,7 +9,7 @@
 		(YIP 9)
 		(WAH 1)))
 
-(define tree (generate-hoffman-tree pairs))
+(define tree (generate-huffman-tree pairs))
 
 (define msg '(GET A JOB
 		  SHA NA NA NA NA NA NA NA NA
