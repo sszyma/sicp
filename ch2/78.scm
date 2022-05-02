@@ -95,8 +95,8 @@
 
   ;; interface for the rest of the system
   (define (tag x) (attach-tag 'rational x))
-  (put 'numer 'rational numer)
-  (put 'denom 'rational denom)
+  (put 'numer '(rational) numer)
+  (put 'denom '(rational) denom)
   (put 'add '(rational rational)
        (lambda (x y) (tag (add-rat x y))))
   (put 'sub '(rational rational)
@@ -110,8 +110,8 @@
        (lambda (n d) (tag (make-rat n d))))
   'done)
 
-(define (numer r) ((get 'numer 'rational) r))
-(define (denom r) ((get 'denom 'rational) r))
+(define (numer r) (apply-generic 'numer r))
+(define (denom r) (apply-generic 'denom r))
 
 (install-rational-package)
 
@@ -232,4 +232,4 @@
 (define (add x y) (apply-generic 'add x y))
 (define (sub x y) (apply-generic 'sub x y))
 (define (mul x y) (apply-generic 'mul x y))
-(define (div x y) (apply-gneeric 'div x y))
+(define (div x y) (apply-generic 'div x y))
