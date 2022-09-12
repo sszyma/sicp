@@ -1,0 +1,30 @@
+;; this is enough to allow the arguments of constructors
+;; of the complex number type to be of a generic non-complex type
+(define (install-generic-complex-compatibility-package)
+  ;; internal procedures
+  (define (square x) (* x x))
+  (define (square-rat x)
+    (make-rational (square (car x)) (square (cdr x))))
+  (define (sin-rat x) (sin (/ (car x) (cdr x))))
+  (define (cos-rat x) (cos (/ (car x) (cdr x))))
+  (define (sqrt-rat x) (sqrt (/ (car x) (cdr x))))
+  (define (atan-rat x y) (atan (/ (car x) (cdr x))
+			       (/ (car y) (cdr y))))
+  ;; interface for the rest of the system
+  (put 'scheme-number 'square square)
+  (put 'rational 'square square-rat)
+  (put 'scheme-number 'sqrt sqrt)
+  (put 'rational 'sqrt sqrt-rat)
+  (put 'scheme-number 'sin sin)
+  (put 'rational 'sin sin-rat)
+  (put 'scheme-number 'cos cos)
+  (put 'rational 'cos cos-rat)
+  (put '(scheme-number scheme-number) 'atan atan)
+  (put '(rational rational) 'atan atan-rat)
+  'done)
+
+(define (square x) (apply-generic 'square x))
+(define (sqrt x) (apply-generic 'sqrt x))
+(define (sin x) (apply-generic 'sin x))
+(define (cos x) (apply-generic 'cos x))
+(define (atan x y) (apply-generic 'atan x y))
